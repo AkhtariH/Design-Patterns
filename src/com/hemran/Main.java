@@ -1,8 +1,7 @@
 package com.hemran;
 
-import com.hemran.Items.Decorator.GreenItemDecorator;
-import com.hemran.Items.Decorator.RedItemDecorator;
-import com.hemran.Items.Decorator.YellowItemDecorator;
+import com.hemran.Items.Decorator.ItemColorDecorator;
+import com.hemran.Items.Decorator.ItemPriorityDecorator;
 import com.hemran.Items.Item;
 import com.hemran.Items.Priority;
 import com.hemran.Items.ReminderItem;
@@ -20,6 +19,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Main {
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+
 	private static Todo todo;
 	private static TaskCreator taskCreator;
 	private static Task currentTask;
@@ -94,9 +97,9 @@ public class Main {
 				String check = it.isChecked() ? "X" : " ";
 				if (it instanceof ReminderItem) {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-					System.out.println("- " + it.getContent() + " at " + ((ReminderItem) it).getTime().format(formatter) + " [" + check + "]" + ", Priority: " + it.getPriority());
+					System.out.println("- " + it.getContent() + " at " + ((ReminderItem) it).getTime().format(formatter) + " [" + check + "]");
 				} else {
-					System.out.println("- " + it.getContent() + " [" + check + "]" + ", Priority: " + it.getPriority());
+					System.out.println("- " + it.getContent() + " [" + check + "]");
 				}
 			}
 		} else {
@@ -215,16 +218,16 @@ public class Main {
 			Item item = null;
 			switch(color.toUpperCase()) {
 				case "GREEN":
-					item = new GreenItemDecorator(currentTask.getItems().get(nr - 1));
+					item = new ItemPriorityDecorator(new ItemColorDecorator(currentTask.getItems().get(nr - 1), ANSI_GREEN), prio);
 					break;
 				case "YELLOW":
-					item = new YellowItemDecorator(currentTask.getItems().get(nr - 1));
+					item = new ItemPriorityDecorator(new ItemColorDecorator(currentTask.getItems().get(nr - 1), ANSI_YELLOW), prio);
 					break;
 				case "RED":
-					item = new RedItemDecorator(currentTask.getItems().get(nr - 1));
+					item = new ItemPriorityDecorator(new ItemColorDecorator(currentTask.getItems().get(nr - 1), ANSI_RED), prio);
 					break;
 				default:
-					item = currentTask.getItems().get(nr - 1);
+					item = new ItemPriorityDecorator(currentTask.getItems().get(nr - 1), prio);
 			}
 
 			item.setContent(content);
@@ -326,16 +329,16 @@ public class Main {
 		Item item = null;
 		switch(color.toUpperCase()) {
 			case "GREEN":
-				item = new GreenItemDecorator(maskItem);
+				item = new ItemPriorityDecorator(new ItemColorDecorator(maskItem, ANSI_GREEN), prio);
 				break;
 			case "YELLOW":
-				item = new YellowItemDecorator(maskItem);
+				item = new ItemPriorityDecorator(new ItemColorDecorator(maskItem, ANSI_YELLOW), prio);
 				break;
 			case "RED":
-				item = new RedItemDecorator(maskItem);
+				item = new ItemPriorityDecorator(new ItemColorDecorator(maskItem, ANSI_RED), prio);
 				break;
 			default:
-				item = maskItem;
+				item = new ItemPriorityDecorator(maskItem, prio);
 		}
 
 		currentTask.addItem(item);
