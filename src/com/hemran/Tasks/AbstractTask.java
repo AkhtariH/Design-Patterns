@@ -29,7 +29,7 @@ public abstract class AbstractTask implements Task {
 
     @Override
     public void addItem(Item i) {
-        if (size() <= maxSize) {
+        if (size() < maxSize || maxSize == -1) {
             i.highlight();
             this.itemList.add(i);
         } else {
