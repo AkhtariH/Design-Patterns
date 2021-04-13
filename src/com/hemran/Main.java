@@ -144,26 +144,19 @@ public class Main {
 		System.out.println("---------------------------------------");
 		System.out.println("Change List State");
 		System.out.println("---------------------------------------");
-    	System.out.println("[1] Backlog State");
-		System.out.println("[2] In Progress State");
-		System.out.println("[3] Done State");
+    	System.out.println("[1] Previous");
+		System.out.println("[2] Next");
 
 		Scanner in = new Scanner(System.in);
 		int choice = in.nextInt();
-		WorkState state = null;
+
 		if (choice == 1) {
-			state = new BacklogState();
+			currentTask.previousState();
 		} else if (choice == 2) {
-			state = new InProgressState();
-		} else if (choice == 3) {
-			state = new DoneState();
+			currentTask.nextState();
 		} else {
 			System.out.println("Not a valid choice.");
 			changeState();
-		}
-
-		if (currentTask instanceof Work) {
-			state.state((Work) currentTask);
 		}
 
 		listView();

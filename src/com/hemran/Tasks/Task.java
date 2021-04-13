@@ -9,8 +9,6 @@ public interface Task{
 
     String getName();
 
-    void setName(String name);
-
     void addItem(Item i);
 
     void removeItem(Item i);
@@ -26,5 +24,7 @@ public interface Task{
     void previousState();
 
     void nextState();
+
+    void setMaxSize(int size);
 
 }
