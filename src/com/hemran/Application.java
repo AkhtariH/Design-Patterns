@@ -1,5 +1,7 @@
 package com.hemran;
 
+import com.hemran.Date.DateFormat;
+import com.hemran.Date.DateValidator;
 import com.hemran.Items.Decorator.ItemColorDecorator;
 import com.hemran.Items.Decorator.ItemPriorityDecorator;
 import com.hemran.Items.Decorator.ItemReminderDecorator;
@@ -11,6 +13,7 @@ import com.hemran.Tasks.Factory.TaskFactory;
 import com.hemran.Tasks.Task;
 import com.hemran.Tasks.Work;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Application {
@@ -322,6 +325,13 @@ public class Application {
             System.out.println("Time (DD-MM-YYYY HH:MM): ");
             Scanner in5 = new Scanner(System.in);
             String time = in5.nextLine();
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy h:m");
+            DateValidator validator = new DateFormat(dateFormatter);
+
+            if (!validator.isValid(time)) {
+                time = "01-01-2021 00:00";
+            }
+
             item = new ItemReminderDecorator(item, time);
         }
 
