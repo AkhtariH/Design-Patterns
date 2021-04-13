@@ -9,6 +9,17 @@ public class BacklogState implements WorkState {
         work.setState(this);
     }
 
+    @Override
+    public void next(Work work) {
+        work.set
+    }
+
+    @Override
+    public void prev(Work work) {
+
+    }
+
+    @Override
     public String toString() {
         return "Backlog State";
     }

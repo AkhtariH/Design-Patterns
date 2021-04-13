@@ -52,4 +52,10 @@ public abstract class AbstractTask implements Task {
     @Override
     public void setState(WorkState state) {}
 
+    @Override
+    public void previousState() {}
+
+    @Override
+    public void nextState() {}
+
 }

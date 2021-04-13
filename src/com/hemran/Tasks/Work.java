@@ -18,9 +18,16 @@ public class Work extends AbstractTask {
     }
 
     @Override
-    public void setState(WorkState state) {
-        this.state = state;
+    public void setState(WorkState state) { this.state = state; }
+
+    @Override
+    public void previousState() {
+        state.prev(this);
     }
 
+    @Override
+    public void nextState() {
+        state.next(this);
+    }
 
 }

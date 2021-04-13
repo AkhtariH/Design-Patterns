@@ -7,20 +7,24 @@ import java.util.ArrayList;
 
 public interface Task{
 
-    public String getName();
+    String getName();
 
-    public void setName(String name);
+    void setName(String name);
 
-    public void addItem(Item i);
+    void addItem(Item i);
 
-    public void removeItem(Item i);
+    void removeItem(Item i);
 
-    public int size();
+    int size();
 
-    public ArrayList<Item> getItems();
+    ArrayList<Item> getItems();
 
-    public WorkState getState();
+    WorkState getState();
 
-    public void setState(WorkState state);
+    void setState(WorkState state);
+
+    void previousState();
+
+    void nextState();
 
 }
