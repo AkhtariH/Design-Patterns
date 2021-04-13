@@ -1,11 +1,10 @@
 package com.hemran;
 
-import com.hemran.Items.Decorator.GreenItemDecorator;
-import com.hemran.Items.Decorator.RedItemDecorator;
-import com.hemran.Items.Decorator.YellowItemDecorator;
+import com.hemran.Items.Decorator.ItemColorDecorator;
+import com.hemran.Items.Decorator.ItemPriorityDecorator;
+import com.hemran.Items.Decorator.ItemReminderDecorator;
 import com.hemran.Items.Item;
 import com.hemran.Items.Priority;
-import com.hemran.Items.ReminderItem;
 import com.hemran.Items.ToDoItem;
 import com.hemran.Tasks.Factory.TaskCreator;
 import com.hemran.Tasks.States.BacklogState;
@@ -20,6 +19,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Main {
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+
 	private static Todo todo;
 	private static TaskCreator taskCreator;
 	private static Task currentTask;
@@ -92,12 +95,7 @@ public class Main {
 		if (currentTask.size() > 0) {
 			for (Item it : currentTask.getItems()) {
 				String check = it.isChecked() ? "X" : " ";
-				if (it instanceof ReminderItem) {
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-					System.out.println("- " + it.getContent() + " at " + ((ReminderItem) it).getTime().format(formatter) + " [" + check + "]" + ", Priority: " + it.getPriority());
-				} else {
-					System.out.println("- " + it.getContent() + " [" + check + "]" + ", Priority: " + it.getPriority());
-				}
+				System.out.println("[" + check + "] " + it.getContent());
 			}
 		} else {
 			System.out.println("No entries found.");
@@ -205,33 +203,35 @@ public class Main {
 			Scanner in4 = new Scanner(System.in);
 			String color = in4.nextLine();
 
+
+
+			Item item = null;
+			switch(color.toUpperCase()) {
+				case "GREEN":
+					item = new ItemPriorityDecorator(new ItemColorDecorator(currentTask.getItems().get(nr - 1), ANSI_GREEN), prio);
+					break;
+				case "YELLOW":
+					item = new ItemPriorityDecorator(new ItemColorDecorator(currentTask.getItems().get(nr - 1), ANSI_YELLOW), prio);
+					break;
+				case "RED":
+					item = new ItemPriorityDecorator(new ItemColorDecorator(currentTask.getItems().get(nr - 1), ANSI_RED), prio);
+					break;
+				default:
+					item = new ItemPriorityDecorator(currentTask.getItems().get(nr - 1), prio);
+			}
+
 			String time = null;
-			if (currentTask.getItems().get(nr - 1) instanceof ReminderItem) {
+			if (currentTask.getItems().get(nr - 1) instanceof ItemReminderDecorator) {
 				System.out.println("Time (DD-MM-YYYY HH:MM): ");
 				Scanner in5 = new Scanner(System.in);
 				time = in5.nextLine();
 			}
 
-			Item item = null;
-			switch(color.toUpperCase()) {
-				case "GREEN":
-					item = new GreenItemDecorator(currentTask.getItems().get(nr - 1));
-					break;
-				case "YELLOW":
-					item = new YellowItemDecorator(currentTask.getItems().get(nr - 1));
-					break;
-				case "RED":
-					item = new RedItemDecorator(currentTask.getItems().get(nr - 1));
-					break;
-				default:
-					item = currentTask.getItems().get(nr - 1);
-			}
-
 			item.setContent(content);
 			item.setPriority(prio);
 
-			if (item instanceof ReminderItem) {
-				((ReminderItem) item).setTime(time);
+			if (currentTask.getItems().get(nr - 1) instanceof ItemReminderDecorator) {
+				((ItemReminderDecorator) currentTask.getItems().get(nr - 1)).setTime(time);
 			}
 
 			listView();
@@ -314,28 +314,28 @@ public class Main {
 		Scanner in3 = new Scanner(System.in);
 		String color = in3.nextLine();
 
-		Item maskItem = null;
+		Item maskItem = new ToDoItem(content, prio);
+
+		Item item = null;
+		switch(color.toUpperCase()) {
+			case "GREEN":
+				item = new ItemPriorityDecorator(new ItemColorDecorator(maskItem, ANSI_GREEN), prio);
+				break;
+			case "YELLOW":
+				item = new ItemPriorityDecorator(new ItemColorDecorator(maskItem, ANSI_YELLOW), prio);
+				break;
+			case "RED":
+				item = new ItemPriorityDecorator(new ItemColorDecorator(maskItem, ANSI_RED), prio);
+				break;
+			default:
+				item = new ItemPriorityDecorator(maskItem, prio);
+		}
+
 		if (type == 2) {
 			System.out.println("Time (DD-MM-YYYY HH:MM): ");
 			Scanner in5 = new Scanner(System.in);
 			String time = in5.nextLine();
-			maskItem = new ReminderItem(content, time, prio);
-		} else {
-			maskItem = new ToDoItem(content, prio);
-		}
-		Item item = null;
-		switch(color.toUpperCase()) {
-			case "GREEN":
-				item = new GreenItemDecorator(maskItem);
-				break;
-			case "YELLOW":
-				item = new YellowItemDecorator(maskItem);
-				break;
-			case "RED":
-				item = new RedItemDecorator(maskItem);
-				break;
-			default:
-				item = maskItem;
+			item = new ItemReminderDecorator(item, time);
 		}
 
 		currentTask.addItem(item);
