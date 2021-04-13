@@ -9,6 +9,7 @@ public abstract class AbstractTask implements Task {
 
     private String name;
     private ArrayList<Item> itemList;
+    private int maxSize = 20;
 
     public AbstractTask(String name) {
         this.name = name;
@@ -19,19 +20,21 @@ public abstract class AbstractTask implements Task {
     public int size() { return this.itemList.size(); }
 
     @Override
+    public void setMaxSize(int size) { this.maxSize = size; }
+
+    @Override
     public String getName() {
         return this.name;
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
     public void addItem(Item i) {
-        i.highlight();
-        this.itemList.add(i);
+        if (size() <= maxSize) {
+            i.highlight();
+            this.itemList.add(i);
+        } else {
+            System.out.println("List is full!");
+        }
     }
 
     @Override
@@ -51,5 +54,11 @@ public abstract class AbstractTask implements Task {
 
     @Override
     public void setState(WorkState state) {}
+
+    @Override
+    public void previousState() {}
+
+    @Override
+    public void nextState() {}
 
 }
