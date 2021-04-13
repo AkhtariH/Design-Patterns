@@ -10,7 +10,7 @@ public class YellowItemDecorator extends ItemDecorator {
 
     @Override
     public String getContent() {
-        return this.highlight() + super.getContent() + "\u001B[0m";
+        return this.highlight() + this.item.getContent() + "\u001B[0m";
     }
 
     @Override
