@@ -42,6 +42,7 @@ The objective of this final assignment is to develop a Java application that inc
 - Some error handling
 - Improved state pattern by adding next and previous state
 - Added unique functionality for each state
+- Added ItemColorDecorator, ItemPriorityDecorator and ItemReminderDecorator
 - Fixed Decorator by adding super etc.
 - Created Application class where all the console output is handled
 - Created .jar file for execution
