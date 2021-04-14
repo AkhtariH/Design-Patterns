@@ -13,9 +13,6 @@ The objective of this final assignment is to develop a Java application that inc
 
 [Click here](https://newuniversity-my.sharepoint.com/personal/hemran_akhtari_student_nhlstenden_com/Documents/Design_Patterns_Hemran_Akhtari/Design_Patterns_ToDo_Application.pdf).
 
-## Class diagram
-...
-
 ## Requirements
 - Java JDK 11 or higher
 
@@ -24,6 +21,11 @@ The objective of this final assignment is to develop a Java application that inc
 1. ``` git clone https://github.com/AkhtariH/Design-Patterns.git ```
 2. ``` cd Design-Patterns/out/artifacts/todo_jar ```
 3. ``` java -jar todo.jar ```
+
+## Class diagram
+...
+
+
 
 
 ## Changelog
