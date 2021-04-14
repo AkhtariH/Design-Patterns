@@ -1,26 +1,31 @@
 package com.hemran.Tasks;
 
 import com.hemran.Items.Item;
+import com.hemran.Tasks.States.Rights;
 import com.hemran.Tasks.States.WorkState;
 
 import java.util.ArrayList;
 
 public interface Task{
 
-    public String getName();
+    String getName();
 
-    public void setName(String name);
+    void addItem(Item i);
 
-    public void addItem(Item i);
+    void removeItem(Item i);
 
-    public void removeItem(Item i);
+    int size();
 
-    public int size();
+    ArrayList<Item> getItems();
 
-    public ArrayList<Item> getItems();
+    WorkState getState();
 
-    public WorkState getState();
+    void setState(WorkState state);
 
-    public void setState(WorkState state);
+    void previousState();
+
+    void nextState();
+
+    void setRights(Rights[] right);
 
 }

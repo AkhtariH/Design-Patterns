@@ -1,6 +1,7 @@
 package com.hemran.Tasks;
 
 import com.hemran.Items.Item;
+import com.hemran.Tasks.States.Rights;
 import com.hemran.Tasks.States.WorkState;
 
 import java.util.ArrayList;
@@ -21,11 +22,6 @@ public abstract class AbstractTask implements Task {
     @Override
     public String getName() {
         return this.name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -52,4 +48,12 @@ public abstract class AbstractTask implements Task {
     @Override
     public void setState(WorkState state) {}
 
+    @Override
+    public void previousState() {}
+
+    @Override
+    public void nextState() {}
+
+    @Override
+    public void setRights(Rights[] rights) {}
 }
