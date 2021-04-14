@@ -28,7 +28,13 @@ public class Application {
     public void run() {
         todo = new Todo();
         taskCreator = new TaskFactory();
+        clearScreen();
         mainMenu();
+    }
+
+    public void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public void mainMenu() {
@@ -51,6 +57,8 @@ public class Application {
         System.out.print("Choose: ");
         Scanner in = new Scanner(System.in);
         int i = in.nextInt();
+
+        clearScreen();
 
         if (i <= todo.size()) {
             currentTask = todo.getTasks().get(i - 1);
@@ -79,7 +87,7 @@ public class Application {
 
         Task task = taskCreator.createTask(type.toUpperCase(), name);
         todo.addTask(task);
-
+        clearScreen();
         mainMenu();
     }
 
@@ -116,6 +124,7 @@ public class Application {
                 break;
             case 2:
                 addItem();
+                clearScreen();
                 break;
             case 3:
                 editItem();
@@ -130,6 +139,7 @@ public class Application {
                 deleteList();
                 break;
             case 7:
+                clearScreen();
                 mainMenu();
                 break;
         }
@@ -154,11 +164,13 @@ public class Application {
             changeState();
         }
 
+        clearScreen();
         listView();
     }
 
     public void deleteList() {
         todo.removeTask(currentTask);
+        clearScreen();
         mainMenu();
     }
 
@@ -224,6 +236,7 @@ public class Application {
                 ((ItemReminderDecorator) currentTask.getItems().get(nr - 1)).setTime(time);
             }
 
+            clearScreen();
             listView();
         } else {
             System.out.println("Not a valid choice.");
@@ -241,6 +254,7 @@ public class Application {
 
         if (nr <= currentTask.size() && nr >= 1) {
             currentTask.removeItem(currentTask.getItems().get(nr - 1));
+            clearScreen();
             listView();
         } else {
             System.out.println("Not a valid choice.");
@@ -263,6 +277,7 @@ public class Application {
                 currentTask.getItems().get(nr - 1).setChecked(true);
             }
 
+            clearScreen();
             listView();
         } else {
             System.out.println("Not a valid choice.");
@@ -337,6 +352,7 @@ public class Application {
 
         currentTask.addItem(item);
 
+        clearScreen();
         listView();
     }
 }

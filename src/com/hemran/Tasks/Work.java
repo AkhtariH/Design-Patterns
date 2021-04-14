@@ -6,6 +6,7 @@ import com.hemran.Tasks.States.Rights;
 import com.hemran.Tasks.States.WorkState;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class Work extends AbstractTask {
 
@@ -26,6 +27,11 @@ public class Work extends AbstractTask {
             super.getItems().add(i);
         } else {
             System.out.println("This state does not allow you to add an additional item.");
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -37,6 +43,11 @@ public class Work extends AbstractTask {
             super.getItems().remove(i);
         } else {
             System.out.println("This state does not allow you to remove an item.");
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
