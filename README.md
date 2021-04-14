@@ -11,7 +11,7 @@ The objective of this final assignment is to develop a Java application that inc
 
 ## Documentation
 
-[Click here](https://newuniversity-my.sharepoint.com/personal/hemran_akhtari_student_nhlstenden_com/Documents/Design_Patterns_Hemran_Akhtari/Design_Patterns_ToDo_Application.pdf).
+[Click here](https://newuniversity-my.sharepoint.com/:b:/g/personal/hemran_akhtari_student_nhlstenden_com/Eb2sQxctwutHvrNmtiz0F8cBmKxeuegIfvKtsk3bKCpUXw?e=ozmU0h).
 
 ## Requirements
 - Java JDK 11 or higher
@@ -23,10 +23,10 @@ The objective of this final assignment is to develop a Java application that inc
 3. ``` java -jar todo.jar ```
 
 ## Class diagram
-...
 
-
-
+<p align="center">
+<img src="https://newuniversity-my.sharepoint.com/:i:/g/personal/hemran_akhtari_student_nhlstenden_com/ETccRE-NauhNhNEHyICW9JQB26rdxrQa3COnY039nvSJwQ?e=H459hU" alt="Class Diagram">
+</p>
 
 ## Changelog
 ### Version 1.0
