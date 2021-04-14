@@ -31,7 +31,7 @@ The objective of this final assignment is to develop a Java application that inc
 
 ### Version 1.1
 - Some error handling
-- Improved state pattern by hadding next and previous state
+- Improved state pattern by adding next and previous state
 - Added unique functionality for each state
 - Fixed Decorator by adding super etc.
 - Created Application class where all the console output is handled
