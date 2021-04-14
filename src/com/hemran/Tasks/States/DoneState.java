@@ -4,7 +4,7 @@ import com.hemran.Tasks.Work;
 
 public class DoneState implements WorkState {
 
-    private final int MAX_SIZE = -1;
+    private final Rights[] RIGHTS = {};
 
     @Override
     public void next(Work work) {
@@ -15,12 +15,12 @@ public class DoneState implements WorkState {
     public void prev(Work work) {
         WorkState state = new InProgressState();
         work.setState(state);
-        work.setMaxSize(state.getMaxSize());
+        work.setRights(state.getRights());
     }
 
     @Override
-    public int getMaxSize() {
-        return MAX_SIZE;
+    public Rights[] getRights() {
+        return this.RIGHTS;
     }
 
     @Override

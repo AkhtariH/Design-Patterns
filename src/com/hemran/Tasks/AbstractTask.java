@@ -1,6 +1,7 @@
 package com.hemran.Tasks;
 
 import com.hemran.Items.Item;
+import com.hemran.Tasks.States.Rights;
 import com.hemran.Tasks.States.WorkState;
 
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ public abstract class AbstractTask implements Task {
 
     private String name;
     private ArrayList<Item> itemList;
-    private int maxSize = 20;
 
     public AbstractTask(String name) {
         this.name = name;
@@ -20,21 +20,14 @@ public abstract class AbstractTask implements Task {
     public int size() { return this.itemList.size(); }
 
     @Override
-    public void setMaxSize(int size) { this.maxSize = size; }
-
-    @Override
     public String getName() {
         return this.name;
     }
 
     @Override
     public void addItem(Item i) {
-        if (size() < maxSize || maxSize == -1) {
-            i.highlight();
-            this.itemList.add(i);
-        } else {
-            System.out.println("List is full!");
-        }
+        i.highlight();
+        this.itemList.add(i);
     }
 
     @Override
@@ -61,4 +54,6 @@ public abstract class AbstractTask implements Task {
     @Override
     public void nextState() {}
 
+    @Override
+    public void setRights(Rights[] rights) {}
 }

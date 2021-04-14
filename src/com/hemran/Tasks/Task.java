@@ -1,6 +1,7 @@
 package com.hemran.Tasks;
 
 import com.hemran.Items.Item;
+import com.hemran.Tasks.States.Rights;
 import com.hemran.Tasks.States.WorkState;
 
 import java.util.ArrayList;
@@ -25,6 +26,6 @@ public interface Task{
 
     void nextState();
 
-    void setMaxSize(int size);
+    void setRights(Rights[] right);
 
 }

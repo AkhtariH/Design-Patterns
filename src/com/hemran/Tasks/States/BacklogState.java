@@ -4,13 +4,13 @@ import com.hemran.Tasks.Work;
 
 public class BacklogState implements WorkState {
 
-    private final int MAX_SIZE = 10;
+    private final Rights[] RIGHTS = { Rights.ADD, Rights.DELETE };
 
     @Override
     public void next(Work work) {
         WorkState state = new InProgressState();
         work.setState(state);
-        work.setMaxSize(state.getMaxSize());
+        work.setRights(state.getRights());
     }
 
     @Override
@@ -19,8 +19,8 @@ public class BacklogState implements WorkState {
     }
 
     @Override
-    public int getMaxSize() {
-        return MAX_SIZE;
+    public Rights[] getRights() {
+        return this.RIGHTS;
     }
 
     @Override
